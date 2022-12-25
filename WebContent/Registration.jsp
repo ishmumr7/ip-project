@@ -39,7 +39,7 @@ body{
                       <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                         <div class="card-body p-4 p-md-5">
                           <h3 class="text-success mb-4 pb-2 pb-md-0 mb-md-5">Please Register</h3>
-                          <form onsubmit="">
+                          <form action="AskHelpForm.jsp">
               
                             <div class="row">
                               <div class="col-md-6 mb-4">
@@ -128,7 +128,7 @@ body{
                             </div>
               
                             <div class="mt-4 pt-2">
-                              <input onClick="selectUser()" class="btn btn-success   btn-lg " type="submit"  value="Submit" />
+                              <input  class="btn btn-success   btn-lg " type="submit"  value="Submit" />
                             </div>
               
                           </form>
