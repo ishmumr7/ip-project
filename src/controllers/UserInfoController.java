@@ -22,12 +22,13 @@ public class UserInfoController {
 		
 		return "Registration";
 	}
-	@ResponseBody()
+	//@ResponseBody()
 	@RequestMapping("/added")
 	public String addUser(Model mod,HttpServletRequest request)
 	{
 		Session session= HibernateSF.getSession().openSession();
 		UserInfo user = new UserInfo();
+		String userType =request.getParameter("userType");
 		int phone =Integer.parseInt(request.getParameter("phone"));
 		user.setName(request.getParameter("name"));
 		user.setPassword(request.getParameter("password"));
@@ -39,7 +40,18 @@ public class UserInfoController {
 		session.save(user);
 		session.getTransaction().commit();
 		session.close();
-		
+		if(userType.equals("Volunteer"))
+		{
+			return "Volunteer";
+		}
+		else if(userType.equals("Donor"))
+		{
+			return "inputfeedback";
+		}
+		else if(userType.equals("DonationSeeker"))
+		{
+			return "AskHelpForm";
+		}
 		return "ge";
 	}
 }
