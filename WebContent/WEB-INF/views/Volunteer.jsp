@@ -66,7 +66,8 @@
 
   <div class="card">
     <div class="card-header">
-<span class="text-success fw-bold">     Donor Name:</span>   Maria Tamanna
+ 
+<span class="text-success fw-bold">     Donor Name:</span> <a href="registration?id=${name}">maria</a>   Maria Tamanna
     </div>
     <div class="card-body">
         <h5 class="card-title text-success">Chocolate Donuts</h5>

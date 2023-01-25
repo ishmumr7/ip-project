@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.Session;
@@ -21,6 +23,44 @@ public class UserInfoController {
 		
 		
 		return "Registration";
+	}
+	
+	@RequestMapping("/login")
+	public String login()
+	{
+		
+		return "Login";
+	}
+	//@ResponseBody()
+	@RequestMapping("/loggedIn")
+	public String logged(HttpServletRequest request)
+	{
+		
+		Session session= HibernateSF.getSession().openSession();
+		String message = "No User Found with these credentials";
+		request.setAttribute("message", message);
+		List<UserInfo> uList = session.createQuery("from UserInfo").list();
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		for(int i=0; i<uList.size();i++)
+		{
+			if(uList.get(i).getName().equals(email)&& uList.get(i).getPassword().equals(password) )
+			{
+				if(uList.get(i).getUserType().equals("Volunteer"))
+				{
+					return "Volunteer";
+				}
+				else if(uList.get(i).getUserType().equals("Donor"))
+				{
+					return "inputfeedback";
+				}
+				else if(uList.get(i).getUserType().equals("DonationSeeker"))
+				{
+					return "AskHelpForm";
+				}
+			}
+		}
+return "Login";
 	}
 	//@ResponseBody()
 	@RequestMapping("/added")

@@ -42,14 +42,14 @@ body{
                       <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                         <div class="card-body p-4 p-md-5">
                           <h3 class="text-success mb-4 pb-2 pb-md-0 mb-md-5">Login</h3>
-                          <form onsubmit="event.preventDefault()">
+                          <form action="loggedIn?id=${name}" method="GET">
               
                             <div class="row">
                               <div class="col-md-12 mb-4">
               
                                 <div class="form-outline">
-                                  <label class="form-label" for="email">Email</label>
-                                  <input required type="email" id="email" class="form-control form-control-lg" />
+                                  <label class="form-label"  for="email">Email</label>
+                                  <input required  name="email" id="email" class="form-control form-control-lg" />
                                 </div>
               
                               </div>
@@ -58,7 +58,7 @@ body{
               
                                 <div class="form-outline">
                                   <label class="form-label" for="password">Password</label>
-                                  <input required type="password" id="password" class="form-control form-control-lg" />
+                                  <input required type="password" name="password" id="password" class="form-control form-control-lg" />
                                   
                                 </div>
                               </div>
@@ -72,9 +72,9 @@ body{
                             </div>
               
                             <div class="mt-4 pt-2">
-                              <input class="btn btn-success  btn-lg " type="Login" value="Login" />
+                              <input class="btn btn-success  btn-lg " type="submit" value="Login" />
                             </div>
-              
+             <p class="text-danger"> ${message}</p>
                           </form>
                         </div>
                       </div>
