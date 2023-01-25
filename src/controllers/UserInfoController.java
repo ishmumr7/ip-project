@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import dbUtil.HibernateSF;
+import models.DonationForm;
 import models.UserInfo;
 @Controller
 public class UserInfoController {
@@ -52,6 +53,10 @@ public class UserInfoController {
 			sess.setAttribute("password", password);
 				if(uList.get(i).getUserType().equals("Volunteer"))
 				{
+					Session session2= HibernateSF.getSession().openSession();
+					List<DonationForm> donationList = session2.createQuery("from DonationForm").list();
+					request.setAttribute("donationList", donationList);
+					
 					return "Volunteer";
 				}
 				else if(uList.get(i).getUserType().equals("Donor"))
@@ -105,7 +110,11 @@ return "Login";
 		 sess.setAttribute("email", request.getParameter("email"));
 			sess.setAttribute("password", request.getParameter("password"));
 		if(userType.equals("Volunteer"))
-		{
+		{   
+			Session session2= HibernateSF.getSession().openSession();
+			List<DonationForm> donationList = session2.createQuery("from DonationForm").list();
+			request.setAttribute("donationList", donationList);
+			
 			return "Volunteer";
 		}
 		else if(userType.equals("Donor"))
@@ -114,6 +123,7 @@ return "Login";
 		}
 		else if(userType.equals("DonationSeeker"))
 		{
+			
 			return "AskHelpForm";
 		}
 		}

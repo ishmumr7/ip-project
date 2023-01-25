@@ -33,9 +33,18 @@ public String root2(Model mod)
 @RequestMapping("/deliveryAccepted")
 public String deliveryAccepted(HttpServletRequest request)
 {
- String id = request.getParameter("id");
-return "Accepted"+id;	
+ int id = Integer.parseInt(request.getParameter("id"));
+ 
+	Session session= HibernateSF.getSession().openSession();
+DonationForm dform = session.get(DonationForm.class, id);
+dform.setDelivered("accepted");
+session.beginTransaction();
+session.update(dform);
+session.getTransaction().commit();
+session.close();
+return "Accepted"+dform.getDelivered();	
 }
+@ResponseBody()
 @RequestMapping("/donationAdded")
 public String donationAdd(HttpServletRequest request)
 {
@@ -55,9 +64,21 @@ public String donationAdd(HttpServletRequest request)
 	session.getTransaction().commit();
 	session.close();
 	Session session2= HibernateSF.getSession().openSession();
-	
 	List<DonationForm> donationList = session2.createQuery("from DonationForm").list();
 	request.setAttribute("donationList", donationList);
+	
+	return "Volunteer";
+	
+	
+	
+	}
+@RequestMapping("/volunteer")
+public String volunteer(HttpServletRequest request)
+{
+	Session session2= HibernateSF.getSession().openSession();
+	List<DonationForm> donationList = session2.createQuery("from DonationForm").list();
+	request.setAttribute("donationList", donationList);
+	
 	return "Volunteer";
 	
 	}
@@ -104,6 +125,7 @@ public String helpApplication(HttpServletRequest request)
 			
 		}
 	}
+	
 	request.setAttribute("userFormList", userFormList);
 //	return "these forms"+userFormList;
 	return "ApplicationSubmit";
