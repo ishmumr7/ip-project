@@ -109,23 +109,23 @@
                     <h2>Donation Form </h2>
                 </div>
                 <hr>
-                <form action="" method="post">
+                <form action="donationAdded" method="POST">
                     <table>
                         <tr>
                             <td class="profile">Food Name:</td>
-                            <td class="profile"> <input style="width:300px" type="text" class="form-control" placeholder="Food Name" value=""aria-label="Last name"></td>
+                            <td class="profile"> <input name="foodName" style="width:300px" type="text" class="form-control" placeholder="Food Name" value=""aria-label="Last name"></td>
                         </tr>
                         <tr>
                             <td class="profile">Location:</td>
-                            <td class="profile"> <input style="width:300px" type="email" class="form-control" placeholder="Location" value=""aria-label="Last name"></td>
+                            <td class="profile"> <input name="location" style="width:300px" type="email" class="form-control" placeholder="Location" value=""aria-label="Last name"></td>
                         </tr>
                         <tr>
                             <td class="profile">Phone Number:</td>
-                            <td class="profile"> <input style="width:300px" type="text" class="form-control" placeholder="Phone Number" value=""aria-label="last-name"></td>
+                            <td class="profile"> <input name="phoneNo" style="width:300px" type="text" class="form-control" placeholder="Phone Number" value=""aria-label="last-name"></td>
                         </tr>
                         <tr>
                             <td class="profile">Description: </td>
-                            <td class="profile"> <textarea class="form-control" placeholder="Description" id="floatingTextarea2" style="height: 100px"></textarea>
+                            <td class="profile"> <textarea name="foodDesc" class="form-control" placeholder="Description" id="floatingTextarea2" style="height: 100px"></textarea>
                             </td>
                         </tr>
                     </table>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+       <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,15 +49,25 @@
           </nav>
     </nav>
     <!-- nav  -->
-<div class="d-flex justify-content-center align-items-center mt-5">
-    <div class="card ">
-        <div class="card-header">
+<div class="d-flex flex-wrap justify-content-center align-items-center mt-5">
+ <c:forEach items="${userFormList}" var="key">
+ 
+   
+      <c:if test="${key.getStatus()=='pending'}">
+         <div class="card ">
+     
+   <div class="card-header">
           You have successfully applied for help
         </div>
         <div class="card-body">
           <blockquote class="blockquote mb-0">
-            <p><i class="fas fa-circle text-warning fa-1x"></i><span>Application In Progress</span></p>
           
+
+            <p><i class="fas fa-circle text-warning fa-1x"></i><span>Application is ${key.getStatus() } </span></p>
+          <p>Application ID: ${key.getFormid() }</p>
+                    <p>Application Reason: ${key.getReason() }</p>
+                         
+                                        <p>Application Help Type: ${key.getTypeOfHelp() }</p>
             <footer class="blockquote-footer"> <cite title="Source Title">Wait for the admin to review your application, once reviewed the result will be shown in this page 
                 <li> <i class="fas fa-circle text-success fa-1x"></i>(Approved)</li>
                 <li><i class="fas fa-circle text-warning fa-1x"></i>(Pending)</li>
@@ -65,8 +76,11 @@
           </blockquote>
         </div>
       </div>
-</div>
-<div class="d-flex justify-content-center align-items-center mt-5">
+      </c:if>
+      
+      <div class="d-flex flex-wrap justify-content-center align-items-center mt-5">
+
+      <c:if test="${key.getStatus()=='approved'}">
     <div class="card ">
         <div class="card-header">
           Admin has reviewed your application
@@ -75,7 +89,7 @@
           <blockquote class="blockquote mb-0">
             <p><i class="fas fa-circle text-success fa-1x"></i><span>Application Approved</span></p>
           
-            <footer class="blockquote-footer"> <cite title="Source Title">Please Click on this link to proceed <form action="HelpStatus.jsp"> <input class="btn btn-success   btn-lg " type="submit" value="Seeker's DashBoard  ------------------------------------------------"> </form>
+            <footer class="blockquote-footer"> <cite title="Source Title">Please Click on this link to proceed------------------------------------------------------------------ <form action="HelpStatus.jsp"> <input class="btn btn-success   btn-lg " type="submit" value="Seeker's DashBoard  ------------------------------------------------"> </form>
                 <li> <i class="fas fa-circle text-success fa-1x"></i>(Approved)</li>
                 <li><i class="fas fa-circle text-warning fa-1x"></i>(Pending)</li>
                 <li><i class="fas fa-circle text-danger fa-1x"></i>(Rejected)</li>
@@ -83,8 +97,10 @@
           </blockquote>
         </div>
       </div>
+        </c:if>
 </div>
-<div class="d-flex justify-content-center align-items-center mt-5">
+<div class="d-flex flex-column justify-content-center align-items-center mt-5">
+      <c:if test="${key.getStatus()=='rejected'}">
     <div class="card ">
         <div class="card-header">
           Case Closed
@@ -100,7 +116,13 @@
             </cite></footer>
           </blockquote>
         </div>
+               </c:if>
       </div>
+      </c:forEach>
+ 
+</div>
+
+
 </div>
 </body>
 </html>

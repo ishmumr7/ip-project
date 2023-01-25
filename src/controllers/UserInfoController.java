@@ -3,6 +3,7 @@ package controllers;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -33,26 +34,29 @@ public class UserInfoController {
 	}
 	//@ResponseBody()
 	@RequestMapping("/loggedIn")
-	public String logged(HttpServletRequest request)
+	public String logged(HttpServletRequest request, HttpSession sess)
 	{
 		
 		Session session= HibernateSF.getSession().openSession();
+		sess= request.getSession();
 		String message = "No User Found with these credentials";
 		request.setAttribute("message", message);
 		List<UserInfo> uList = session.createQuery("from UserInfo").list();
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
+		
 		for(int i=0; i<uList.size();i++)
 		{
 			if(uList.get(i).getEmail().equals(email)&& uList.get(i).getPassword().equals(password) )
-			{
+			{  sess.setAttribute("email", email);
+			sess.setAttribute("password", password);
 				if(uList.get(i).getUserType().equals("Volunteer"))
 				{
 					return "Volunteer";
 				}
 				else if(uList.get(i).getUserType().equals("Donor"))
 				{
-					return "inputfeedback";
+					return "Donation";
 				}
 				else if(uList.get(i).getUserType().equals("DonationSeeker"))
 				{
@@ -64,9 +68,10 @@ return "Login";
 	}
 	//@ResponseBody()
 	@RequestMapping("/added")
-	public String addUser(Model mod,HttpServletRequest request)
+	public String addUser(Model mod,HttpServletRequest request,HttpSession sess)
 	{
 		Session session= HibernateSF.getSession().openSession();
+		sess= request.getSession();
 		UserInfo user = new UserInfo();
 		String email = request.getParameter("email");
 		String message = "Email Already Exists";
@@ -97,19 +102,21 @@ return "Login";
 		session.save(user);
 		session.getTransaction().commit();
 		session.close();
+		 sess.setAttribute("email", request.getParameter("email"));
+			sess.setAttribute("password", request.getParameter("password"));
 		if(userType.equals("Volunteer"))
 		{
 			return "Volunteer";
 		}
 		else if(userType.equals("Donor"))
 		{
-			return "inputfeedback";
+			return "Donation";
 		}
 		else if(userType.equals("DonationSeeker"))
 		{
 			return "AskHelpForm";
 		}
 		}
-		return "ge";
+		return "error";
 	}
 }

@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 public class UserInfo {
 	
 	@Id
-	@Column(name="userid")
+	@Column(name="userid" )
 	int userid;
 	@GeneratedValue(strategy= GenerationType.AUTO)
 

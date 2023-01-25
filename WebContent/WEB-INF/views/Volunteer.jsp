@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+       <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,49 +50,27 @@
 
     <!-- header -->
 <!-- Active donation items -->
-
+ <c:forEach items="${donationList}" var="key">
+ 
 <div class="card">
     <div class="card-header">
-<span class="text-success fw-bold">     Donor Name:</span>   Peyton Crawshaw
+<span class="text-success fw-bold">     Donation ID:</span>   ${key.getDonationId() }
     </div>
+ <form  action="deliveryAccepted?id=${key.getDonationId()}">
     <div class="card-body">
-        <h5 class="card-title text-success">Mutton Biriyani</h5>
-        <p class="card-text"> <span class="text-success">Description:</span>Hello, I run a hotel and some of my mutton biriyani got saved , I would like to donate all of it to someone needy </p>
-        <p> <span class="text-success">Location:</span>19 Jalan Alam , Skudai .Johor</p> 
-        <p> <span class="text-success">Phone Number:</span>+602727272</p> 
-
-      <a href="/Volunteer/AcceptDelivery.html" class="btn btn-success">Accept Delivery</a>
+        <h5 class="card-title text-success">${key.getFoodName() }</h5>
+        <p class="card-text"> <span class="text-success">${key.getFoodDesc() }</span>Hello, I run a hotel and some of my mutton biriyani got saved , I would like to donate all of it to someone needy </p>
+        <p> <span class="text-success">Location:</span>${key.getLocation() }</p> 
+        <p> <span class="text-success">Phone Number:</span>${key.getPhoneNo() }</p> 
+        <input type="hidden" name="id" value="${key.getDonationId()}">
+<input class="btn btn-success" type="submit" value="Accept Delivery">
+    
     </div>
+ </form>
   </div>
+</c:forEach>
 
-  <div class="card">
-    <div class="card-header">
- 
-<span class="text-success fw-bold">     Donor Name:</span> <a href="registration?id=${name}">maria</a>   Maria Tamanna
-    </div>
-    <div class="card-body">
-        <h5 class="card-title text-success">Chocolate Donuts</h5>
-        <p class="card-text"> <span class="text-success">Description:</span>Hello, I bought too amny donuts today and I think I cannot eat all of it by myself and it might go bad so i would like to gift them to someone </p>
-        <p> <span class="text-success">Location:</span>43 KDOJ UTM , Skudai .Johor</p> 
-        <p> <span class="text-success">Phone Number:</span>+602727272</p> 
 
-      <a href="#" class="btn btn-success">Accept Delivery</a>
-    </div>
-  </div>
 
-  <div class="card">
-    <div class="card-header">
-<span class="text-success fw-bold">     Donor Name:</span>   James Peterson
-    </div>
-    <div class="card-body">
-        <h5 class="card-title text-success">Donate Money</h5>
-        <p><span class="text-success ">Amount:</span>RM100</p>
-        <p class="card-text"> <span class="text-success">Description:</span>Today is my grandfather's death anniversary so I would like to donate some money to the poor  </p>
-        <p> <span class="text-success">Location:</span>19 Jalan Alam , Skudai .Johor</p> 
-        <p> <span class="text-success">Phone Number:</span>+602727272</p> 
-
-      <a href="#" class="btn btn-success">Accept Delivery</a>
-    </div>
-  </div>
 </body>
 </html>

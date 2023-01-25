@@ -47,7 +47,7 @@
           </nav>
     </nav> 
      <!-- nav -->
-  
+  <a href="allApplication">See Previous Application Status</a>
     <section class="vh-100 gradient-custom w-100">
         <div class="container py-5 h-100 text-success">
           <div class="row justify-content-center align-items-center h-100">
@@ -55,20 +55,20 @@
               <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                 <div class="card-body p-4 p-md-5">
                   <h3 class="text-success mb-4 pb-2 pb-md-0 mb-md-5">Please Fill Up the Help application form</h3>
-                  <form action="ApplicationSubmit.jsp">
+                  <form action="allApplication" method="POST">
       
                     <div class="row">
                       <div class="col-md-6 mb-4">
       
                         <div class="form-outline">
-                          <input type="text" id="firstName" class="form-control form-control-lg" />
+                          <input type="text" name="fname" id="firstName" class="form-control form-control-lg" />
                           <label class="form-label" for="firstName">First Name</label>
                         </div>
       
                       </div>
                       <div class="col-md-6 mb-4">      
                         <div class="form-outline">
-                          <input type="text" id="lastName" class="form-control form-control-lg" />
+                          <input type="text" name="lname" id="lastName" class="form-control form-control-lg" />
                           <label class="form-label" for="lastName">Last Name</label>
                         </div>
       
@@ -79,7 +79,7 @@
                       <div class="col-md-6 mb-4 d-flex align-items-center">
       
                         <div class="form-outline datepicker w-100">
-                          <input type="date" class="form-control form-control-lg" id="birthdayDate" />
+                          <input type="date"name="dob"  class="form-control form-control-lg" id="birthdayDate" />
                           <label for="birthdayDate" class="form-label">Date of Birth</label>
                         </div>
       
@@ -89,20 +89,20 @@
                         <h6 class="mb-2 pb-1">Gender: </h6>
       
                         <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="femaleGender"
-                            value="option1" checked />
+                          <input class="form-check-input" type="radio" name="gender" id="femaleGender"
+                            value="Female" checked />
                           <label class="form-check-label" for="femaleGender">Female</label>
                         </div>
       
                         <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="maleGender"
-                            value="option2" />
+                          <input class="form-check-input" type="radio" name="gender" id="maleGender"
+                            value="Male" />
                           <label class="form-check-label" for="maleGender">Male</label>
                         </div>
       
                         <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="otherGender"
-                            value="option3" />
+                          <input class="form-check-input" type="radio" name="gender" id="otherGender"
+                            value="Other" />
                           <label class="form-check-label" for="otherGender">Other</label>
                         </div>
       
@@ -113,15 +113,15 @@
                       <div class="col-md-6 mb-4 pb-2">
       
                         <div class="form-outline">
-                          <input type="email" id="emailAddress" class="form-control form-control-lg" />
-                          <label class="form-label" for="emailAddress">Email</label>
+                          <input type="email" readonly id="emailAddress" value=<%=session.getAttribute("email") %> name="email" class="form-control form-control-lg" />
+                          <label class="form-label"  for="emailAddress">Email</label>
                         </div>
       
                       </div>
                       <div class="col-md-6 mb-4 pb-2">
       
                         <div class="form-outline">
-                          <input type="tel" id="phoneNumber" class="form-control form-control-lg" />
+                          <input type="tel" id="phoneNumber" name="phone" class="form-control form-control-lg" />
                           <label class="form-label" for="phoneNumber">Phone Number</label>
                         </div>
       
@@ -131,7 +131,7 @@
                         <div class="col-md-6 mb-4 pb-2">
         
                           <div class="form-outline">
-                            <input type="email" class="form-control form-control-lg" />
+                            <input type="email" name="occupation" class="form-control form-control-lg" />
                             <label class="form-label" for="Occupation">Occupation</label>
                           </div>
         
@@ -139,7 +139,7 @@
                         <div class="col-md-6 mb-4 pb-2">
         
                           <div class="form-outline">
-                            <input type="text" id="Address" class="form-control form-control-lg" />
+                            <input type="text" name="address" id="Address" class="form-control form-control-lg" />
                             <label class="form-label" for="Address">Full Address</label>
                           </div>
         
@@ -151,7 +151,7 @@
       
                     
                         <label class="form-label select-label">Need Help with</label>
-                        <select id="userOption" class="select form-control-lg">
+                        <select id="userOption" name="typeOfHelp" class="select form-control-lg">
                             <option value="1" disabled>Choose option</option>
                             <option value="Food">Food</option>
                             <option value="Money">Money</option>
@@ -163,7 +163,7 @@
                     </div>
                     
                     <div class="form-outline mt-4">
-                     <textarea class="border border-1 rounded" name="" id="" cols="80" rows="5"></textarea>
+                     <textarea class="border border-1 rounded" name="reason" id="" cols="80" rows="5"></textarea>
                         <label class="form-label" for="reason">State Your Reason(Write Carefully)</label>
                       </div>
                     <div class="mt-4 pt-2">
