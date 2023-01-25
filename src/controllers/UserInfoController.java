@@ -44,7 +44,7 @@ public class UserInfoController {
 		String password = request.getParameter("password");
 		for(int i=0; i<uList.size();i++)
 		{
-			if(uList.get(i).getName().equals(email)&& uList.get(i).getPassword().equals(password) )
+			if(uList.get(i).getEmail().equals(email)&& uList.get(i).getPassword().equals(password) )
 			{
 				if(uList.get(i).getUserType().equals("Volunteer"))
 				{
@@ -68,6 +68,23 @@ return "Login";
 	{
 		Session session= HibernateSF.getSession().openSession();
 		UserInfo user = new UserInfo();
+		String email = request.getParameter("email");
+		String message = "Email Already Exists";
+		request.setAttribute("message", message);
+		List<UserInfo> uList = session.createQuery("from UserInfo").list();
+		boolean exists=false;
+		for(int i=0; i<uList.size();i++)
+		{
+			if(uList.get(i).getEmail().equals(email))
+			{
+			  exists =true;
+			 
+			}
+		}
+		if(exists)
+			return "Registration";
+		else
+		{
 		String userType =request.getParameter("userType");
 		int phone =Integer.parseInt(request.getParameter("phone"));
 		user.setName(request.getParameter("name"));
@@ -91,6 +108,7 @@ return "Login";
 		else if(userType.equals("DonationSeeker"))
 		{
 			return "AskHelpForm";
+		}
 		}
 		return "ge";
 	}

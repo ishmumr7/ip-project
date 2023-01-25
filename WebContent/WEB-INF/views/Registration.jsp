@@ -97,7 +97,7 @@ body{
                             <div class="mt-4 pt-2">
                               <input  class="btn btn-success   btn-lg " type="submit"  value="Submit" />
                             </div>
-            
+            <p class="text-danger">${message}</p>
                           </form>
                         </div>
                       </div>
