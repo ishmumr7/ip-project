@@ -50,14 +50,19 @@
 
     <!-- header -->
 <!-- Active donation items -->
+
  <c:forEach items="${donationList}" var="key">
  
 <div class="card">
     <div class="card-header">
 <span class="text-success fw-bold">     Donation ID:</span>   ${key.getDonationId() }
     </div>
- <form  action="deliveryAccepted?id=${key.getDonationId()}">
+   
+ <form method="POST" action="deliveryAccepted">
+ 
     <div class="card-body">
+    <input name="volunteerEmail" value="<%=session.getAttribute("email")%>">
+   
         <h5 class="card-title text-success">${key.getFoodName() }</h5>
         <p class="card-text"> <span class="text-success">${key.getFoodDesc() }</span>Hello, I run a hotel and some of my mutton biriyani got saved , I would like to donate all of it to someone needy </p>
         <p> <span class="text-success">Location:</span>${key.getLocation() }</p> 

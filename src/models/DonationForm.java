@@ -14,7 +14,21 @@ public class DonationForm {
 	String phoneNo;
 	String foodDesc;
 	String delivered;
-    public int getDonationId() {
+	String helpaccepted;
+	String acceptedVolunteer;
+    public String getAcceptedVolunteer() {
+		return acceptedVolunteer;
+	}
+	public void setAcceptedVolunteer(String acceptedVolunteer) {
+		this.acceptedVolunteer = acceptedVolunteer;
+	}
+	public String getHelpaccepted() {
+		return helpaccepted;
+	}
+	public void setHelpaccepted(String helpaccepted) {
+		this.helpaccepted = helpaccepted;
+	}
+	public int getDonationId() {
 		return donationId;
 	}
 	public void setDonationId(int donationId) {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
 import org.springframework.stereotype.Controller;
@@ -29,20 +30,23 @@ public String root2(Model mod)
 	
 	return "Registration";
 }
-@ResponseBody()
+//@ResponseBody()
 @RequestMapping("/deliveryAccepted")
-public String deliveryAccepted(HttpServletRequest request)
+public String deliveryAccepted(HttpServletRequest request,HttpSession s)
 {
  int id = Integer.parseInt(request.getParameter("id"));
- 
+ String volunteerEmail = request.getParameter("volunteerEmail");
 	Session session= HibernateSF.getSession().openSession();
 DonationForm dform = session.get(DonationForm.class, id);
 dform.setDelivered("accepted");
+
+dform.setAcceptedVolunteer(volunteerEmail);
 session.beginTransaction();
 session.update(dform);
 session.getTransaction().commit();
 session.close();
-return "Accepted"+dform.getDelivered();	
+
+return "Accepted Delivery"+dform.getDelivered()+dform.getAcceptedVolunteer()+volunteerEmail;	
 }
 @ResponseBody()
 @RequestMapping("/donationAdded")
@@ -59,6 +63,7 @@ public String donationAdd(HttpServletRequest request)
 	donationData.setPhoneNo(phoneNo);
 	donationData.setFoodDesc(foodDesc);
 	donationData.setDelivered("No");
+	donationData.setHelpaccepted("no");
 	session.beginTransaction();
 	session.save(donationData);
 	session.getTransaction().commit();

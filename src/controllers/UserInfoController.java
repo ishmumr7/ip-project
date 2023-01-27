@@ -76,9 +76,11 @@ return "Login";
 	public String addUser(Model mod,HttpServletRequest request,HttpSession sess)
 	{
 		Session session= HibernateSF.getSession().openSession();
-		sess= request.getSession();
+		
+		
 		UserInfo user = new UserInfo();
 		String email = request.getParameter("email");
+		sess.setAttribute("email", email);
 		String message = "Email Already Exists";
 		request.setAttribute("message", message);
 		List<UserInfo> uList = session.createQuery("from UserInfo").list();
